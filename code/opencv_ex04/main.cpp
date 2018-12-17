@@ -26,9 +26,10 @@ void Pause()
 }
 int main()
 {
-    Mat src00, dst00;
+    Mat src00, dst00,dst000;
 	Mat src01, dst01;
 	src00 = imread("image-20150507-1245-fctkfq.jpg");//imread("Lena_original.jpg");
+
 	if (!src00.data) {
 		printf("could not load image...\n");
 	}
@@ -49,33 +50,36 @@ int main()
         dst00=src00.clone();
         dst01=src01.clone();
 
+        dst000.create(src00.size(),src00.type());
+
         for(int x=0;x<cols;x++)
         {
-            Vec3f ReadRGB = dst00.at<Vec3f>(0, x);
-            float blue = ReadRGB.val[0];
-            float green = ReadRGB.val[1];
-            float red = ReadRGB.val[2];
-
-            dst00.at<Vec3b>(0,x)[0]= 255; // blue
-            dst00.at<Vec3b>(0,x)[1]= 0; // green
-            dst00.at<Vec3b>(0,x)[2]= 255; // red
-
             for(int y=0;y<rows;y++)
             {
-                if(x==y)
-                {
-                    dst00.at<Vec3b>(y,x)[0]= 0; // blue
-                    dst00.at<Vec3b>(y,x)[1]= 255; // green
-                    dst00.at<Vec3b>(y,x)[2]= 0; // red
-                }
-                uchar ReadGRAY = dst01.at<uchar>(y, x);
-                dst01.at<uchar>(y, x)= 255-ReadGRAY;
+
+                dst01.at<uchar>(y, x)= 255-dst01.at<uchar>(y, x);
+
+                Vec3b ReadRGB = dst00.at<Vec3b>(y, x);
+                int b=ReadRGB.val[0];
+                int g=ReadRGB.val[1];
+                int r=ReadRGB.val[2];
+                dst00.at<Vec3b>(y,x)[0]=255-b;
+                dst00.at<Vec3b>(y,x)[1]=255-g;
+                dst00.at<Vec3b>(y,x)[2]=255-r;
+
+                dst000.at<Vec3b>(y,x)[0]=0;
+                dst000.at<Vec3b>(y,x)[2]=g;
+                dst000.at<Vec3b>(y,x)[3]=r;
             }
         }
         namedWindow("Lena_test01", CV_WINDOW_AUTOSIZE);
         imshow("Lena_test01", dst00);
         namedWindow("Lena_test02", CV_WINDOW_AUTOSIZE);
         imshow("Lena_test02", dst01);
+
+        namedWindow("Lena_test03", CV_WINDOW_AUTOSIZE);
+        imshow("Lena_test03", dst000);
+
     }
 
 	waitKey(0);
