@@ -50,6 +50,10 @@ int main()
 
         float alpha=1.5;
         float beta=0.5;
+
+        //Mat m1;
+        //src00.convertTo(m1,CV_32F);
+
         for(int x=0;x<cols;x++)
         {
             for(int y=0;y<rows;y++)
@@ -59,7 +63,7 @@ int main()
 
                 dst01.at<uchar>(y, x)= saturate_cast<uchar>(alpha*src01.at<uchar>(y, x)+beta);//確保值大小範圍為0~255之間
 
-                Vec3b ReadRGB = src00.at<Vec3b>(y, x);
+                Vec3b ReadRGB = src00.at<Vec3b>(y, x);//Vec3f ReadRGB = m1.at<Vec3f>(y, x);
                 int b=ReadRGB.val[0];
                 int g=ReadRGB.val[1];
                 int r=ReadRGB.val[2];
