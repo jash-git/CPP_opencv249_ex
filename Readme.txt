@@ -15,3 +15,13 @@ opencv_ex06-創建空白Mat資料空間zerors、判斷是RGB或者為灰階圖ch
 opencv_ex07-創建空白Mat資料空間zerors、繪製線段line、繪製矩形rectangle、繪製橢圓和圓弧ellipse、繪製圓型circle、繪製填色封閉任意形狀fillPoly、OPENCV亂數種子和取亂數RNG、OPENCV畫筆顏色變數Scalar 
 
 opencv_ex08-利用均值模糊blur、高斯模糊GaussianBlur目的為了給圖像預處理時候減低噪聲(雜訊)
+
+opencv_ex09-利用中值濾波medianBlur、高斯雙邊模糊bilateralFilter、最後利用提高對比度遮罩(mask)運算來補強圖像
+
+	中值對椒鹽噪聲有很好的抑製作用
+	
+	均值模糊無法克服邊緣像素信息丟失缺陷。原因是均值濾波是基於平均權重
+
+	高斯模糊部分克服了該缺陷，但是無法完全避免，因為沒有考慮像素值的不同
+
+	高斯雙邊模糊 – 是邊緣保留的濾波方法，避免了邊緣信息丟失，保留了圖像輪廓不變
