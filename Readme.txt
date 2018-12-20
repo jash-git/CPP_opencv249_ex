@@ -13,3 +13,5 @@ opencv_ex05-兩張大小(寬、高)相同圖像合成addWeighted
 opencv_ex06-創建空白Mat資料空間zerors、判斷是RGB或者為灰階圖channels、抓取/設定圖像每一彩色像素點的RGB值at<Vec3b>(y, x)、抓取/設定圖像每一灰階像素點的值at<uchar>(y, x)、確保值大小範圍為0~255之間saturate_cast<uchar>、調整圖像亮度和對比度屬於像素變換output(x,y)=A*input(x,y)+B
 
 opencv_ex07-創建空白Mat資料空間zerors、繪製線段line、繪製矩形rectangle、繪製橢圓和圓弧ellipse、繪製圓型circle、繪製填色封閉任意形狀fillPoly、OPENCV亂數種子和取亂數RNG、OPENCV畫筆顏色變數Scalar 
+
+opencv_ex08-利用均值模糊blur、高斯模糊GaussianBlur目的為了給圖像預處理時候減低噪聲(雜訊)
