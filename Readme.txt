@@ -31,7 +31,7 @@ opencv_ex10-讀取圖檔時轉灰階IMREAD_GRAYSCALE、設定門閥值灰階轉�
 	膨脹->白色越多
 	
 	腐蝕->黑色越多
-	
+		
 opencv_ex11-讀取圖檔時轉灰階IMREAD_GRAYSCALE、可調門閥值動態灰階轉二值化threshold、形態學操作morphologyEx
 	
 	形態學操作種類:
@@ -40,7 +40,10 @@ opencv_ex11-讀取圖檔時轉灰階IMREAD_GRAYSCALE、可調門閥值動態灰�
 		CV_MOP_GRADIENT:膨脹減去腐蝕-又稱為基本梯度（其它還包括-內部梯度、方向梯度）
 		CV_MOP_TOPHAT:頂帽 是原圖像與開操作之間的差值圖像
 		CV_MOP_BLACKHAT:黑帽 是閉操作圖像與源圖像的差值圖像
-		
+				
 	心得:對人像而言-只有CV_MOP_GRADIENT比較有用,size(3,3)
+	
+opencv_ex12-讀取圖檔時轉灰階IMREAD_GRAYSCALE、彩色轉灰階cvtColor、區域門閥值灰階轉二值化adaptiveThreshold、利用開操作偵測直線、利用開操作偵測橫線、利用開操作實現簡易驗證碼圖像過濾保留文字
+
 
 	
