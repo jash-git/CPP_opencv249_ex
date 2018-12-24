@@ -45,5 +45,10 @@ opencv_ex11-讀取圖檔時轉灰階IMREAD_GRAYSCALE、可調門閥值動態灰�
 	
 opencv_ex12-讀取圖檔時轉灰階IMREAD_GRAYSCALE、彩色轉灰階cvtColor、區域門閥值灰階轉二值化adaptiveThreshold、利用開操作偵測直線、利用開操作偵測橫線、利用開操作實現簡易驗證碼圖像過濾保留文字
 
-
+opencv_ex13-彩色轉灰階cvtColor、圖像放大pyrUp、圖像縮小pyrDown、高斯平滑濾波GaussianBlur、圖像相減subtract、圖像歸一化顯示normalize
+	高斯不同(Difference of Gaussian-DOG)
+		定義：就是把同一張圖像在不同的參數下做高斯模糊之後的結果相減，得到的輸出圖像。稱為高斯不同(DOG)
+		高斯不同是圖像的內在特徵，在灰度圖像增強、角點檢測中經常用到。
+	
+	心得:對人像而言-DOG可以精準抓抓出圖像邊緣
 	
