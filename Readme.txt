@@ -50,5 +50,10 @@ opencv_ex13-彩色轉灰階cvtColor、圖像放大pyrUp、圖像縮小pyrDown、
 		定義：就是把同一張圖像在不同的參數下做高斯模糊之後的結果相減，得到的輸出圖像。稱為高斯不同(DOG)
 		高斯不同是圖像的內在特徵，在灰度圖像增強、角點檢測中經常用到。
 	
-	心得:對人像而言-DOG可以精準抓抓出圖像邊緣
+	心得:對人像而言-DOG可以精準抓出圖像邊緣
 	
+opencv_ex14-圖像放大pyrUp、彩色轉灰階cvtColor、可調門閥值動態灰階轉二值化threshold(THRESH_TRIANGLE 參數的應用)
+	
+	心得:
+		THRESH_TRIANGLE 在249沒有這個參數，但是可以直接用16這個數值取代
+		type_value=0就會是opencv_ex11的效果(傳統書本教的二值化)
