@@ -57,3 +57,13 @@ opencv_ex14-圖像放大pyrUp、彩色轉灰階cvtColor、可調門閥值動態�
 	心得:
 		THRESH_TRIANGLE 在249沒有這個參數，但是可以直接用16這個數值取代
 		type_value=0就會是opencv_ex11的效果(傳統書本教的二值化)
+		
+opencv_ex15-圖像放大pyrUp、彩色轉灰階cvtColor、可調門閥值動態灰階轉二值化threshold(THRESH_TRIANGLE 參數的應用)、基本灰階/二值化圖像邊緣檢測filter2D
+
+		Mat Sobel_X = (Mat_<int>(3, 3) << -1, 0, 1, -2,0,2,-1,0,1);
+		
+		Mat Sobel_Y = (Mat_<int>(3, 3) << -1, -2, -1, 0,0,0, 1,2,1);
+		
+		Mat Laplacian = (Mat_<int>(3, 3) << 0, -1, 0, -1, 4, -1, 0, -1, 0);
+	
+	心得: 四種二值化的效果均不相同，所以這範例非常值得一試
