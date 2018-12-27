@@ -67,3 +67,12 @@ opencv_ex15-圖像放大pyrUp、彩色轉灰階cvtColor、可調門閥值動態�
 		Mat Laplacian = (Mat_<int>(3, 3) << 0, -1, 0, -1, 4, -1, 0, -1, 0);
 	
 	心得: 四種二值化的效果均不相同，所以這範例非常值得一試
+	
+opencv_ex16-圖像放大pyrUp、RGB變數Scalar、亂數種子和取亂數RNG、圖像加上邊框(小幅度延伸放大)copyMakeBorder
+
+	copyMakeBorder種類有三種:
+		BORDER_REFLECT_101;//外推像素和影像邊界成鏡像映射
+		BORDER_REPLICATE;//外推的值和邊緣值相同
+		BORDER_CONSTANT;//外推的值為常數，常在仿射變換、透視變換中使用。
+		
+	心得: 亂數種子和取亂數RNG[發現如果只執行一次，那麼數值會固定]
