@@ -76,3 +76,63 @@ opencv_ex16-圖像放大pyrUp、RGB變數Scalar、亂數種子和取亂數RNG、
 		BORDER_CONSTANT;//外推的值為常數，常在仿射變換、透視變換中使用。
 		
 	心得: 亂數種子和取亂數RNG[發現如果只執行一次，那麼數值會固定]
+	
+opencv_ex17-圖像放大pyrUp、彩色轉灰階cvtColor、灰階圖像邊緣檢測Sobel(Scharr)、灰階像素點的值at<uchar>(y, x)、灰階像素運算正規化saturate_cast、單純圖像相加add、圖像相加可定義權重addWeighted
+
+    void Scharr(InputArray src, OutputArray dst, int ddepth, int dx, int dy, double scale=1, double delta=0, int borderType=BORDER_DEFAULT)
+
+        或是Sobel(src, dst, ddepth, dx, dy, CV_SCHARR)，兩者效果相同。
+
+        src：輸入圖。
+        dst：輸出圖，和輸入圖有相同的尺寸和通道數。
+        ddepth：輸出圖的深度，使用方式和Sobel相同。
+        dx：x方向的微分階數。
+        dy：y方向的微分階數。
+        scale：縮放值
+        delta：偏移量。
+		
+    void Sobel(InputArray src, OutputArray dst, int ddepth, int dx, int dy, int ksize=3, double scale=1, double delta=0, int borderType=BORDER_DEFAULT)
+        src：輸入圖。
+        dst：輸出圖，和輸入圖有相同的尺寸和通道數。
+        ddepth：輸出圖的深度，假設輸入圖為CV_8U, 支援CV_8U、CV_16S、CV_32F、CV_64F，假設輸入圖為 CV_16U, 支援CV_16U、CV_32F、CV_64F。
+        dx：x方向的微分階數。
+        dy：y方向的微分階數。
+        ksize：核心，必須為1、3、5或7。
+        scale：縮放值。
+        delta：偏移量。
+		
+    計算輸入圖各像素，並將結果轉成8位元圖
+        void convertScaleAbs(InputArray src, OutputArray dst, double alpha=1, double beta=0)
+        src：輸入圖。
+        dst：輸出圖。
+        alpha：選擇性的乘法因子。
+        beta：選擇性的加法因子。
+        此函式主要進行3步驟；1.計算 2.取絕對值 3.轉成無正負號8位元圖	
+
+    用saturate_cast將每次的計算結果限定在合理範圍，以本例來說就是從0到255，超過255會設定成255，小於0會設定成0。
+        OpenCV 限定合理範圍：template< … > _Tp saturate_cast(_Tp2 v)
+        v：輸入參數，會讓此值在合理範圍。
+        saturate_cast使用模板，所以呼叫時要指定像素深度。
+
+    OpenCV影像相加：void addWeighted(InputArray src1, double alpha, InputArray src2, double beta, double gamma, OutputArray dst, int dtype=-1)
+        src1：輸入圖。
+        alpha：src1的權重。
+        src2：輸入圖，和src1的尺寸和通道數相同。
+        beta：src2的權重。
+        gamma：兩圖相加後再增加的值。
+        dst：輸出圖，輸出矩陣和輸入矩陣有相同的尺寸和通道數。
+        dtype：可有可無的輸出圖深度。
+
+    OpenCV影像相加：void add(InputArray src1, InputArray src2, OutputArray dst, InputArray mask=noArray(), int dtype=-1)
+        src1 ：輸入圖或強度值。
+        src2 ：輸入圖或強度值。
+        dst：輸出圖，輸出圖和輸入圖有相同的尺寸和通道數。
+        mask：可有可無的遮罩，8位元單通道圖，指定那些像素要計算。
+        dtype：可有可無的輸出圖深度。
+
+    心得: 
+		01.雖然已經學會利用灰階圖像做Sobel要讓結果清晰可見的訣竅就是要用convertScaleAbs，但是如果實際應用應該還是要把圖轉成二值化資料會更少，也會比較好後續運算
+		02.Sobel(Scharr)目前測試只能用在灰階圖像，不能用在二值化圖像
+		03.所以OPENCV的邊緣檢測SOP: 灰階->濾波(高斯)->邊緣檢測->二值化
+		
+opencv_ex17_self-自己利用opencv_ex15+opencv_ex17做出可以動態4種二值化之後再進行邊緣檢測的範例
