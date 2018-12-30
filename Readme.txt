@@ -136,3 +136,23 @@ opencv_ex17-圖像放大pyrUp、彩色轉灰階cvtColor、灰階圖像邊緣檢�
 		03.所以OPENCV的邊緣檢測SOP: 灰階->濾波(高斯)->邊緣檢測->二值化
 		
 opencv_ex17_self-自己利用opencv_ex15+opencv_ex17做出可以動態4種二值化之後再進行邊緣檢測的範例
+
+opencv_ex18-圖像放大pyrUp、彩色轉灰階cvtColor、灰階圖像邊緣檢測Laplacian、計算輸入圖各像素，並將結果轉成8位元圖convertScaleAbs、轉二值化threshold [THRESH_OTSU | THRESH_BINARY]
+
+    Otsu流程：
+        先計算影像的直方圖
+        把直方圖強度大於閾值的像素分成一組，把小於閾值的像素分成另一組。
+        分別計算這兩組的組內變異數，並把兩個組內變異數相加。
+        將0~255依序當作閾值來計算組內變異數和，總和值最小的就是結果閾值。
+
+    OpenCV自適應閾值二值化
+        一樣是用threshold()函式，使用方式也一樣，只是最後一個參數增加CV_THRESH_OTSU，目前otsu只能使用在8位元圖。
+
+        double threshold(InputArray src, OutputArray dst, double thresh, double maxval, int type)
+
+        src：輸入圖，只能輸入單通道，8位元或32位元浮點數影像。
+        dst：輸出圖，尺寸大小、深度會和輸入圖相同。
+        thresh：閾值。
+        maxval：二值化結果的最大值。
+        type：二值化操作型態，共有THRESH_BINARY、THRESH_BINARY_INV、THRESH_TRUNC、THRESH_TOZERO、THRESH_TOZERO_INV五種。
+        type從上述五種結合CV_THRESH_OTSU，類似寫成：THRESH_BINARY | CV_THRESH_OTSU		
