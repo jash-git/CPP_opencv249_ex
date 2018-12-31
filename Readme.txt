@@ -168,4 +168,16 @@ opencv_ex19-圖像放大pyrUp、彩色轉灰階cvtColor、灰階圖像可調式�
         threshold2：第二個閾值。
         apertureSize ：Sobel算子的核心大小。
         L2gradient ：梯度大小的算法，預設為false。
-		
+
+opencv_ex20-圖像縮小pyrDown、灰階圖像可調式邊緣檢測Canny、圖像轉換+複製cvtColor、直線偵測HoughLinesP、畫線函數line
+
+    OpenCV 直線偵測
+        void HoughLinesP(InputArray image, OutputArray lines, double rho, double theta, int threshold, double minLineLength=0, double maxLineGap=0)
+
+        image：輸入圖，8位元單通道二值化圖。
+        lines：將所有線的資料存在vector< Vec4i >，Vec4i為每個線段的資料，分別有x1、y1、x2、y2這四個值，(x1，y1)和(x2，y2)分別表示線段的頭尾頂點。
+        rho：距離解析度，越小表示定位要求越準確，但也較易造成應該是同條線的點判為不同線。 1
+        theta：角度解析度，越小表示角度要求越準確，但也較易造成應該是同條線的點判為不同線。 CV_PI/180
+        threshold：累積個數閾值，超過此值的線才會存在lines這個容器內。 10
+        minLineLength ：線段最短距離，超過此值的線才會存在lines這個容器內。 0
+        maxLineGap：最大間隔。 10
