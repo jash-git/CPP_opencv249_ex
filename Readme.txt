@@ -155,4 +155,17 @@ opencv_ex18-圖像放大pyrUp、彩色轉灰階cvtColor、灰階圖像邊緣檢�
         thresh：閾值。
         maxval：二值化結果的最大值。
         type：二值化操作型態，共有THRESH_BINARY、THRESH_BINARY_INV、THRESH_TRUNC、THRESH_TOZERO、THRESH_TOZERO_INV五種。
-        type從上述五種結合CV_THRESH_OTSU，類似寫成：THRESH_BINARY | CV_THRESH_OTSU		
+        type從上述五種結合CV_THRESH_OTSU，類似寫成：THRESH_BINARY | CV_THRESH_OTSU
+
+opencv_ex19-圖像放大pyrUp、彩色轉灰階cvtColor、灰階圖像可調式邊緣檢測Canny、二值化圖像反向輸出
+
+    OpenCV canny
+    void Canny(InputArray image, OutputArray edges, double threshold1, double threshold2, int apertureSize=3, bool L2gradient=false)
+
+        src：輸入圖，單通道8位元圖。
+        dst：輸出圖，尺寸、型態和輸入圖相同。
+        threshold1：第一個閾值。
+        threshold2：第二個閾值。
+        apertureSize ：Sobel算子的核心大小。
+        L2gradient ：梯度大小的算法，預設為false。
+		
