@@ -181,3 +181,18 @@ opencv_ex20-圖像縮小pyrDown、灰階圖像可調式邊緣檢測Canny、圖�
         threshold：累積個數閾值，超過此值的線才會存在lines這個容器內。 10
         minLineLength ：線段最短距離，超過此值的線才會存在lines這個容器內。 0
         maxLineGap：最大間隔。 10
+		
+opencv_ex21-灰階圖像可調式邊緣檢測Canny、圖像複製clone()、圖像複製copyTo(...)、偵測圓HoughCircles、畫圓circle、畫筆顏色變數Scalar
+
+    OpenCV 偵測圓
+        void HoughCircles(InputArray image, OutputArray circles, int method, double dp, double minDist, double param1=100, doubleparam2=100, int minRadius=0, int maxRadius=0)
+
+        image：輸入圖，8位元單通道圖。
+        circles：以vector< Vec3f >記錄所有圓的資訊，每個Vec3f紀錄一個圓的資訊，包含3個浮點數資料，分別表示x、y、radius。
+        method：偵測圓的方法，目前只能使用CV_HOUGH_GRADIENT。
+        dp：偵測解析度倒數比例，假設dp=1，偵測圖和輸入圖尺寸相同，假設dp=2，偵測圖長和寬皆為輸入圖的一半。
+        minDist：圓彼此間的最短距離，太小的話可能會把鄰近的幾個圓視為一個，太大的話可能會錯過某些圓。
+        param1：圓偵測內部會呼叫Canny()尋找邊界，param1就是Canny()的高閾值，低閾值自動設為此值的一半。
+        param2：計數閾值，超過此值的圓才會存入circles。-調整重要參數
+        minRadius：最小的圓半徑。
+        maxRadius：最大的圓半徑。
