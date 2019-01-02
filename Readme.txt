@@ -196,3 +196,16 @@ opencv_ex21-灰階圖像可調式邊緣檢測Canny、圖像複製clone()、圖�
         param2：計數閾值，超過此值的圓才會存入circles。-調整重要參數
         minRadius：最小的圓半徑。
         maxRadius：最大的圓半徑。
+		
+opencv_ex22-圖像放大pyrUp、創建空白Mat資料空間zerors、創建空白Mat資料空間create、幾何變換remap
+     
+    OpenCV重映射
+        void remap(InputArray src, OutputArray dst, InputArray map1, InputArray map2, int interpolation, int borderMode=BORDER_CONSTANT, const Scalar& borderValue=Scalar())
+
+        src：輸入圖。
+        dst：輸出圖，型態和輸入圖相同。
+        map1：第一個輸入的映射表，型態可為CV_16SC2、CV_32FC1或CV_32FC2，尺寸和輸入圖相同，映射表的值代表的是輸入圖此像素位置要轉移去的新x座標。
+        map2：第二個輸入的映射表，型態可為CV_16UC1或 CV_32FC1，尺寸和輸入圖相同，映射表的值代表的是輸入圖此像素位置要轉移去的新y座標。。
+        interpolation：內插型態。
+        borderMode：邊界模式，預設為BORDER_CONSTANT。
+        borderValue：邊界外推值，預設強度為0。            
