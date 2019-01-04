@@ -225,3 +225,45 @@ opencv_ex23-圖像放大pyrUp、彩色轉灰階cvtColor、直方圖拉伸(直方
         將直方圖歸一到所有bin的總合為255。
         計算直方圖累計表。
         用直方圖累計表完成各強度的映射，所以假設強度30所累積的比例為20%，映射的強度即為255*0.2，由於我們直方圖歸一化到255，所以假設強度30所累積的值為20，映射的強度即為20。
+
+opencv_ex24-圖像放大pyrUp、將一張RGB的圖片拆成三張單元色的的圖split、直方圖計算calcHist、如果圖形很大那麼直方圖的點數很多這時就要把值歸一化normalize、四捨五入相關函數
+
+    OpenCV計算直方圖
+        OpenCV的calcHist()函式可得到一個影像的直方圖，為了使用上的彈性，參數有點複雜。
+
+        void calcHist(const Mat* images, int nimages, const int* channels, InputArray mask, OutputArray hist, int dims, const int* histSize, const float** ranges, bool uniform=true, bool accumulate=false)
+
+        images：輸入圖，可以一個或多個圖，深度必須為CV_8U或CV_32F，可為任意通道數，但是每張圖的尺寸和深度必須相同。
+        nimages：有幾張輸入圖。
+        channels：直方圖通道清單。
+        mask：可有可無的遮罩。
+        hist：輸出的直方圖
+        dims：直方圖維度，必須為正數且不能超過CV_MAX_DIMS(目前為32)，假設為灰階圖的直方圖，每個像素只有強度資料，此時維度為1。
+        histSize：直方圖橫軸(也稱bin)數目。
+        ranges：直方圖的強度範圍，以8位元無負號的影像，就是[0,255]。
+        uniform：各維度取值是否一致。
+        accumulate：如果設定為true的話，在呼叫calcHist()這函式的時候，hist的內容不會被清掉，方便我們做多次的直方圖計算的累加。
+		
+    歸一化函式
+        normalize(src, dst, alpha, beta, norm_type, dtype, mask)
+
+        src-輸入陣列。
+
+        dst-與SRC大小相同的輸出陣列。
+
+        α-範數值在範圍歸一化的情況下歸一化到較低的範圍邊界。
+
+        β-上限範圍在範圍歸一化的情況下；它不用於範數歸一化。
+
+        正規化-規範化型別（見下面的細節）。
+            NORM_MINMAX: 陣列的數值被平移或縮放到一個指定的範圍，線性歸一化。
+            NORM_INF: 歸一化陣列的（切比雪夫距離）L∞範數(絕對值的最大值)
+            NORM_L1:  歸一化陣列的（曼哈頓距離）L1-範數(絕對值的和)
+            NORM_L2: 歸一化陣列的(歐幾里德距離)L2-範數
+
+        dType——當輸出為負時，輸出陣列具有與SRC相同的型別；否則，它具有與SRC相同的通道數和深度＝CVH-MatthAsHead（DyType）。
+
+    四捨五入相關函數		
+        cvRound()：返回跟參數最接近的整數值，即四捨五入；
+        cvFloor()：返回不大於參數的最大整數值，即向下取整；
+        cvCeil()：返回不小於參數的最小整數值，即向上取整；
