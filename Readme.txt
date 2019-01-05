@@ -268,7 +268,7 @@ opencv_ex24-圖像放大pyrUp、將一張RGB的圖片拆成三張單元色的的
         cvFloor()：返回不大於參數的最大整數值，即向下取整；
         cvCeil()：返回不小於參數的最小整數值，即向上取整；
 		
-opencv_ex24-圖像放大pyrUp、彩色或灰階轉HSV格式cvtColor、多變量直方圖變數MatND、HSV多變量直方圖計算calcHist、如果圖形很大那麼直方圖的點數很多這時就要把值歸一化normalize、畫面上寫文字putText
+opencv_ex25-圖像放大pyrUp、彩色或灰階轉HSV格式cvtColor、多變量直方圖變數MatND、HSV多變量直方圖計算calcHist、如果圖形很大那麼直方圖的點數很多這時就要把值歸一化normalize、畫面上寫文字putText
     OpenCV計算直方圖
         OpenCV的calcHist()函式可得到一個影像的直方圖，為了使用上的彈性，參數有點複雜。
 
