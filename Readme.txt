@@ -377,4 +377,60 @@ opencv_ex26-圖像放大pyrUp、彩色或灰階轉HSV格式cvtColor、畫矩形r
         關於calcBackProject()這個函式，輸出的反投影結果圖backProject是一幅影像，每個像素代表原本強度在直方圖的機率值，所以假如輸入的直方圖hist是歸一化的，生成的值會在0.0到1.0之間，我們可以將縮放因子scale設成255.0，如此一來可以當作一般的8位元圖秀出結果，愈大的值代表屬於這個直方圖的機會越高。
 
         實際上做影像搜尋時，通常會考慮顏色訊息，畢竟單純強度的話資訊量不足，很難得到理想的結果，且直方圖反透影的結果，是得到影像各位置屬於此直方圖的概率，所以通常會搭配其他演算法使用。
+
+opencv_ex27-影像模板比對matchTemplate、歸一化函式normalize、計算比對後目標影像的位置minMaxLoc、畫矩形rectangle
+    影像模板比對
+        void matchTemplate(InputArray image, InputArray templ, OutputArray result, int method)
+
+        image：輸入圖，必須為 8位元或浮點數圖。
+        templ：輸入的template，尺寸必須小於輸入圖，形態需相同。
+        result：比較結果圖，必須為單通道32位元浮點數圖，如果image的尺寸為W x H，templ的尺寸為w x h，則result的尺寸為(W-w+1)x(H-h+1)。
+        method：比較方法，有以下六種方法可選擇：
+            method=CV_TM_SQDIFF
+            method=CV_TM_SQDIFF_NORMED
+            method=CV_TM_CCORR
+            method=CV_TM_CCORR_NORMED
+            method=CV_TM_CCOEFF
+            method=CV_TM_CCOEFF_NORMED
+
+        當我們的參數為CV_TM_SQDIFF時，計算結果較小時相似度較高，當我們參數為CV_TM_CCORR、CV_TM_CCOEF時，計算結果較大時相似度較高。	
+
+    歸一化函式
+        normalize(src, dst, alpha, beta, norm_type, dtype, mask)
+
+        src-輸入陣列。
+
+        dst-與SRC大小相同的輸出陣列。
+
+        α-範數值在範圍歸一化的情況下歸一化到較低的範圍邊界。
+
+        β-上限範圍在範圍歸一化的情況下；它不用於範數歸一化。
+
+        正規化-規範化型別（見下面的細節）。
+            NORM_MINMAX: 陣列的數值被平移或縮放到一個指定的範圍，線性歸一化。
+            NORM_INF: 歸一化陣列的（切比雪夫距離）L∞範數(絕對值的最大值)
+            NORM_L1:  歸一化陣列的（曼哈頓距離）L1-範數(絕對值的和)
+            NORM_L2: 歸一化陣列的(歐幾里德距離)L2-範數
+
+        dType——當輸出為負時，輸出陣列具有與SRC相同的型別；否則，它具有與SRC相同的通道數和深度＝CVH-MatthAsHead（DyType）。
+
+    當我們得到比較圖後，根據由比較方式，選擇比較圖最小或最大值的地方，就是目標影像的位置。
+        void minMaxLoc(InputArray src, double* minVal, double* maxVal=0, Point* minLoc=0, Point* maxLoc=0, InputArray mask=noArray())
+
+        src：輸入圖。
+        minVal：極小值，可輸入NULL表示不需要。
+        maxVal ：極大值，可輸入NULL表示不需要。
+        minLoc：極小值的位置，可輸入NULL表示不需要。
+        maxLoc：極大值的位置，可輸入NULL表示不需要。
+        mask：可有可無的遮罩。
+		
+	畫矩形
+        void rectangle(Mat& img, Point pt1, Point pt2, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
+
+        img：輸入圖，矩形會畫在上面。
+        pt1：矩形頂點。
+        pt2：矩形頂點，pt1的對角邊
+        color：矩形的顏色。
+        thickness：矩形的邊線寬度，輸入負值或CV_FILLED代表填滿矩形。
+        lineType：通道型態，可輸入8、4、CV_AA： 8->8通道連結。 4->4通道連結。 CV_AA->消除鋸齒(antialiased line)，消除顯示器畫面線邊緣的凹凸鋸齒。		
 		
