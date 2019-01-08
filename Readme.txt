@@ -433,4 +433,5 @@ opencv_ex27-影像模板比對matchTemplate、歸一化函式normalize、計算�
         color：矩形的顏色。
         thickness：矩形的邊線寬度，輸入負值或CV_FILLED代表填滿矩形。
         lineType：通道型態，可輸入8、4、CV_AA： 8->8通道連結。 4->4通道連結。 CV_AA->消除鋸齒(antialiased line)，消除顯示器畫面線邊緣的凹凸鋸齒。		
-		
+
+opencv_ex27_self-影像模板比對matchTemplate、歸一化函式normalize、自己抓取matchTemplate的結果找出相似度大於0.9實現多項目比對	
