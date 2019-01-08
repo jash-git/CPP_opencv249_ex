@@ -435,3 +435,15 @@ opencv_ex27-影像模板比對matchTemplate、歸一化函式normalize、計算�
         lineType：通道型態，可輸入8、4、CV_AA： 8->8通道連結。 4->4通道連結。 CV_AA->消除鋸齒(antialiased line)，消除顯示器畫面線邊緣的凹凸鋸齒。		
 
 opencv_ex27_self-影像模板比對matchTemplate、歸一化函式normalize、自己抓取matchTemplate的結果找出相似度大於0.9實現多項目比對	
+    影像模板比對matchTemplate
+        method：比較方法，有以下六種方法可選擇：
+            method=CV_TM_SQDIFF
+            method=CV_TM_SQDIFF_NORMED
+            method=CV_TM_CCORR
+            method=CV_TM_CCORR_NORMED
+            method=CV_TM_CCOEFF
+            method=CV_TM_CCOEFF_NORMED
+
+        當我們的參數為CV_TM_SQDIFF時，計算結果較小時相似度較高，當我們參數為CV_TM_CCORR、CV_TM_CCOEF時，計算結果較大時相似度較高。	
+	
+	備註:程式碼因為寫3導致要找接近1的數 -> >0.9 反之 如果寫0就要找接近0的數 -> <0.1
