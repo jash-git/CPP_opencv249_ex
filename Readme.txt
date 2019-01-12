@@ -607,3 +607,66 @@ opencv_ex30-彩色或灰階轉HSV格式cvtColor、灰階圖像可調式邊緣檢
 
         RotatedRect minAreaRect(InputArray points)
         InputArray points：表示輸入的點集	
+		
+opencv_ex31-彩色或灰階轉HSV格式cvtColor、灰階圖像可調式邊緣檢測Canny、從邊緣圖找輪廓的點findContours、產生亂數RNG、畫輪廓線drawContours、從輪廓的點計算矩moments、計算矩後求質心、從輪廓的點求面積contourArea、從輪廓的點求周長arcLength、從輪廓的點比對圖形相似度matchShape
+
+    OpenCV canny
+        void Canny(InputArray image, OutputArray edges, double threshold1, double threshold2, int apertureSize=3, bool L2gradient=false)
+
+            src：輸入圖，單通道8位元圖。
+            dst：輸出圖，尺寸、型態和輸入圖相同。
+            threshold1：第一個閾值。
+            threshold2：第二個閾值。
+            apertureSize ：Sobel算子的核心大小。
+            L2gradient ：梯度大小的算法，預設為false。
+		
+    OpenCV找輪廓
+        void findContours(InputOutputArray image, OutputArrayOfArrays contours, int mode, int method, Point offset=Point())
+
+            image：輸入圖，使用八位元單通道圖，所有非零的像素都會列入考慮，通常為二極化後的圖。
+            contours：包含所有輪廓的容器(vector)，每個輪廓都是儲存點的容器(vector)，所以contours的資料結構為vector< vector>。
+            hierarchy：可有可無的輸出向量，以階層的方式記錄所有輪廓。
+            mode：取得輪廓的模式。
+                CV_RETR_EXTERNAL：只取最外層的輪廓。
+                CV_RETR_LIST：取得所有輪廓，不建立階層(hierarchy)。
+                CV_RETR_CCOMP：取得所有輪廓，儲存成兩層的階層，首階層為物件外圍，第二階層為內部空心部分的輪廓，如果更內部有其餘物件，包含於首階層。
+                CV_RETR_TREE：取得所有輪廓，以全階層的方式儲存。
+            method：儲存輪廓點的方法，有以下幾種可選擇：
+                CV_CHAIN_APPROX_NONE：儲存所有輪廓點。
+                CV_CHAIN_APPROX_SIMPLE：對水平、垂直、對角線留下頭尾點，所以假如輪廓為一矩形，只儲存對角的四個頂點。		
+				
+    OpenCV畫輪廓線
+        void drawContours(InputOutputArray image, InputArrayOfArrays contours, int contourIdx, const Scalar& color, int thickness=1, int lineType=8, InputArray hierarchy=noArray(), int maxLevel=INT_MAX, Point offset=Point())
+
+            image：輸入輸出圖，會將輪廓畫在此影像上。
+            contours：包含所有輪廓的容器(vector)，也就是findContours()所找到的contours。
+            contourIdx：指定畫某個輪廓。
+            color：繪製的顏色。
+            lineType：繪製的線條型態。
+            hierarchy：輪廓階層，也就是findContours()所找到的hierarchy。
+            maxLevel：最大階層的輪廓，可以指定想要畫的輪廓，有輸入hierarchy時才會考慮，輸入的值代表繪製的層數。				
+	
+
+    計算矩
+    Moments moments(InputArray array, bool binaryImage=false)
+
+        array：來源圖，可以輸入8位元單通道圖、浮點數2維陣列，或1xN、Nx1的Point或Point2f陣列。
+        binaryImage：影像設定，只有array為影像時才有效果，如果設定為true，所有非零的像素都列入計算。
+        可從Moments計算質心位置。
+        假設返回一個Moments mu，我們可依據下式，從mu計算質心位置，m10、m00、m01、m00都是Moments的類別成員。	
+
+    計算面積
+    double contourArea(InputArray contour, bool oriented=false)
+
+        contour：輸入輪廓，一個含有2維點的vector。
+        oriented：輪廓方向，如果設為ture的話除了面積還會記錄方向，順時鐘和逆時鐘會有正負號的差異，預設為false，不論輪廓方向都返回正的面積值。
+
+    計算周長：
+    double arcLength(InputArray curve, bool closed)
+
+        curve：輸入輪廓，一個含有2維點的vector。
+        closed：輪廓封閉，指定curve是否封閉，
+
+    從輪廓的點比對圖形相似度
+    函數matchShape() 可以幫我們比較兩個形狀或輪廓的相似度。如果返回值越小
+    	https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html#double%20matchShapes(InputArray%20contour1,%20InputArray%20contour2,%20int%20method,%20double%20parameter)
