@@ -670,3 +670,37 @@ opencv_ex31-彩色或灰階轉HSV格式cvtColor、灰階圖像可調式邊緣檢
     從輪廓的點比對圖形相似度
     函數matchShape() 可以幫我們比較兩個形狀或輪廓的相似度。如果返回值越小
     	https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html#double%20matchShapes(InputArray%20contour1,%20InputArray%20contour2,%20int%20method,%20double%20parameter)
+		
+opencv_ex32-建立二值化的畫布Mat::zeros( Size(W,H), CV_8UC1)、畫線line、二值化圖找輪廓的點findContours、輪廓和點距離pointPolygonTest、找出整個影像記憶體中的最大和最小值minMaxLoc、建立彩色的畫布Mat::zeros( src.size(), CV_8UC3 );
+
+    OpenCV找輪廓
+        void findContours(InputOutputArray image, OutputArrayOfArrays contours, int mode, int method, Point offset=Point())
+
+            image：輸入圖，使用八位元單通道圖，所有非零的像素都會列入考慮，通常為二極化後的圖。
+            contours：包含所有輪廓的容器(vector)，每個輪廓都是儲存點的容器(vector)，所以contours的資料結構為vector< vector>。
+            hierarchy：可有可無的輸出向量，以階層的方式記錄所有輪廓。
+            mode：取得輪廓的模式。
+                CV_RETR_EXTERNAL：只取最外層的輪廓。
+                CV_RETR_LIST：取得所有輪廓，不建立階層(hierarchy)。
+                CV_RETR_CCOMP：取得所有輪廓，儲存成兩層的階層，首階層為物件外圍，第二階層為內部空心部分的輪廓，如果更內部有其餘物件，包含於首階層。
+                CV_RETR_TREE：取得所有輪廓，以全階層的方式儲存。
+            method：儲存輪廓點的方法，有以下幾種可選擇：
+                CV_CHAIN_APPROX_NONE：儲存所有輪廓點。
+                CV_CHAIN_APPROX_SIMPLE：對水平、垂直、對角線留下頭尾點，所以假如輪廓為一矩形，只儲存對角的四個頂點。		
+    
+	OpenCV輪廓和點距離
+        double pointPolygonTest(InputArray contour, Point2f pt, bool measureDist)
+
+            用於判斷一個點是否在輪廓中
+            當measureDist設定為true時，若返回值為正，表示點在輪廓內部，返回值為負，表示在輪廓外部，返回值為0，表示在輪廓上。
+            當measureDist設定為false時，若返回值為+1，表示點在輪廓內部，返回值為-1，表示在輪廓外部，返回值為0，表示在輪廓上。
+			
+    找出整個影像記憶體中的最大和最小值
+        void minMaxLoc(InputArray src, double* minVal, double* maxVal=0, Point* minLoc=0, Point* maxLoc=0, InputArray mask=noArray())
+
+        src：輸入圖。
+        minVal：極小值，可輸入NULL表示不需要。
+        maxVal ：極大值，可輸入NULL表示不需要。
+        minLoc：極小值的位置，可輸入NULL表示不需要。
+        maxLoc：極大值的位置，可輸入NULL表示不需要。
+        mask：可有可無的遮罩。			
