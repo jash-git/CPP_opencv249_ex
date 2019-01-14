@@ -703,4 +703,6 @@ opencv_ex32-建立二值化的畫布Mat::zeros( Size(W,H), CV_8UC1)、畫線line
         maxVal ：極大值，可輸入NULL表示不需要。
         minLoc：極小值的位置，可輸入NULL表示不需要。
         maxLoc：極大值的位置，可輸入NULL表示不需要。
-        mask：可有可無的遮罩。			
+        mask：可有可無的遮罩。
+
+opencv_ex33-		
